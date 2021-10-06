@@ -2,9 +2,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +24,8 @@ public class Frame implements ActionListener {
 	private static JLabel text; // +
 	private static JTextArea yResult;
 	private static JTextArea nResult;
-	private static JPanel rBox;
+	private static ImageIcon iIcon;
+	private static JLabel iButton;
 
 	Frame() {
 		frame = new JFrame("Yes or No");
@@ -52,12 +57,17 @@ public class Frame implements ActionListener {
 			amount++;
 		}
 
+		iIcon = new ImageIcon("info.png");
+		iButton = new JLabel(iIcon);
+		iButton.setBounds(10, 380, 50, 50);
+		frame.add(iButton);
+
 		yResult = new JTextArea("YES");
 		yResult.setBackground(Color.LIGHT_GRAY);
 		yResult.setForeground(Color.ORANGE);
 		yResult.setFont(new Font("ARIEL", Font.PLAIN, 60));
 		yResult.setEditable(false);
-		yResult.setBounds(285,130, 140, 80);
+		yResult.setBounds(285, 130, 140, 80);
 		yResult.setVisible(false);
 		frame.add(yResult);
 
@@ -66,12 +76,17 @@ public class Frame implements ActionListener {
 		nResult.setForeground(Color.RED);
 		nResult.setFont(new Font("ARIEL", Font.PLAIN, 60));
 		nResult.setEditable(false);
-		nResult.setBounds(285,130, 140, 80);
+		nResult.setBounds(285, 130, 140, 80);
 		nResult.setVisible(false);
 		frame.add(nResult);
 
 		frame.setVisible(true);
 
+		iButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				new Info();
+			}
+		});
 	}
 
 	@Override
@@ -96,6 +111,6 @@ public class Frame implements ActionListener {
 				break;
 			}
 		}
-	}
 
+	}
 }
